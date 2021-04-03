@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -35,7 +36,25 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
-  const onChangeLogin = () => {};
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = user;
+
+  const onChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="container">
       <div className="container-form">
@@ -43,31 +62,35 @@ const Login = () => {
           <CheckRoundedIcon className={classes.icon} />
         </Avatar>
         <h1>Log in</h1>
-        <form>
+        <form onSubmit={onSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             id="email"
+            value={email}
             label="Email Address"
             name="email"
             autoComplete="email"
             autoFocus
             color="secondary"
-            onChange={onChangeLogin}
+            onChange={onChange}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
+            id="password"
+            value={password}
             name="password"
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
             color="secondary"
+            onChange={onChange}
           />
           <Button
             type="submit"
@@ -79,6 +102,10 @@ const Login = () => {
             Log in
           </Button>
         </form>
+        <Link to="/register" className={classes.textField}>
+          {" "}
+          Don't have an account? Sign Up
+        </Link>
       </div>
     </div>
   );

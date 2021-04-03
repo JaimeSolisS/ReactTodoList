@@ -10,8 +10,6 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 function App() {
-  const [theme2, setTheme] = useState("dark");
-
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = React.useMemo(
@@ -20,12 +18,12 @@ function App() {
         palette: {
           type: prefersDarkMode ? "dark" : "light",
           primary: {
-            main: "#F21B3F",
-            light: "#CC2936",
+            main: "#F21B3F", //Red Munsell
+            light: "#CC2936", //Madder Lake
           },
           secondary: {
-            main: "#70cfff",
-            light: "#008DD5",
+            main: "#70cfff", //Light Sky Blue
+            light: "#008DD5", //Green Blue Crayola
           },
         },
       }),
