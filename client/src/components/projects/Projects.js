@@ -17,12 +17,22 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
+import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+  },
+  icon: {},
+  avatar: {
+    backgroundColor:
+      theme.palette.type === "dark"
+        ? theme.palette.primary.main
+        : theme.palette.primary.light,
+    margin: ".5rem",
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -67,7 +77,11 @@ function Projects(props) {
     <div>
       {/* Side Bar */}
       <div className={classes.toolbar}>
-        <h2>Logo</h2>
+        <Grid container spacing={0} justify="center">
+          <Avatar className={classes.avatar}>
+            <CheckRoundedIcon className={classes.icon} />
+          </Avatar>
+        </Grid>
       </div>
       <Divider />
       <h1>Add Project</h1>
