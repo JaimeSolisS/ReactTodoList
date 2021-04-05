@@ -22,6 +22,8 @@ import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import MeetingRoomRoundedIcon from "@material-ui/icons/MeetingRoomRounded";
+import TaskForm from "../tasks/TaskForm";
+import TaskList from "../tasks/TaskList";
 
 const drawerWidth = 240;
 
@@ -78,7 +80,7 @@ function Projects(props) {
 
   const drawer = (
     <div>
-      {/* Side Bar */}
+      {/* -------------------- Side Bar -----------------------------*/}
       <div className={classes.toolbar}>
         <Grid container justify="center">
           <Avatar className={classes.avatar}>
@@ -105,7 +107,7 @@ function Projects(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {/* Header */}
+      {/* -----------------------Header -------------------------------*/}
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
@@ -163,7 +165,9 @@ function Projects(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {/* CONTENT */}
+        {/* --------------------------CONTENT ----------------------------*/}
+        <TaskForm />
+        <TaskList />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
