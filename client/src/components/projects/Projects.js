@@ -19,6 +19,9 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
+import NewProject from "./NewProject";
+import ProjectList from "./ProjectList";
+import MeetingRoomRoundedIcon from "@material-ui/icons/MeetingRoomRounded";
 
 const drawerWidth = 240;
 
@@ -77,16 +80,22 @@ function Projects(props) {
     <div>
       {/* Side Bar */}
       <div className={classes.toolbar}>
-        <Grid container spacing={0} justify="center">
+        <Grid container justify="center">
           <Avatar className={classes.avatar}>
             <CheckRoundedIcon className={classes.icon} />
           </Avatar>
         </Grid>
       </div>
       <Divider />
-      <h1>Add Project</h1>
+      <Grid container justify="center">
+        <NewProject />
+      </Grid>
+
       <Divider />
-      <h1>Your Projects</h1>
+      <Grid container justify="center">
+        <h1>Your Projects</h1>
+      </Grid>
+      <ProjectList />
     </div>
   );
 
@@ -112,7 +121,12 @@ function Projects(props) {
             <Typography variant="h6" noWrap>
               Hey User
             </Typography>
-            <Typography variant="h6">Sign out</Typography>
+            <a href="#" style={{ textDecoration: "none", color: "white" }}>
+              <Grid container justify="space-between">
+                <MeetingRoomRoundedIcon />
+                <Typography variant="h6">Sign out</Typography>
+              </Grid>
+            </a>
           </Grid>
         </Toolbar>
       </AppBar>
