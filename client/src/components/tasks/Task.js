@@ -4,6 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
+import CreateRoundedIcon from "@material-ui/icons/CreateRounded";
+import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
+import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -77,6 +81,7 @@ const Task = ({ task }) => {
               variant="contained"
               className={classes.complete}
               style={{ textTransform: "none" }}
+              endIcon={<CheckCircleOutlineRoundedIcon />}
             >
               <Typography variant="subtitle2"> Complete</Typography>
             </Button>
@@ -88,6 +93,7 @@ const Task = ({ task }) => {
               variant="contained"
               className={classes.incomplete}
               style={{ textTransform: "none" }}
+              endIcon={<HighlightOffRoundedIcon />}
             >
               <Typography variant="subtitle2"> Incomplete</Typography>
             </Button>
@@ -108,6 +114,7 @@ const Task = ({ task }) => {
                 size="small"
                 variant="contained"
                 className={classes.edit}
+                startIcon={<CreateRoundedIcon />}
               >
                 Edit
               </Button>
@@ -120,6 +127,7 @@ const Task = ({ task }) => {
                 size="small"
                 variant="contained"
                 className={classes.delete}
+                startIcon={<DeleteRoundedIcon />}
               >
                 Delete
               </Button>
