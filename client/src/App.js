@@ -25,6 +25,22 @@ function App() {
             main: "#70cfff", //Light Sky Blue
             light: "#008DD5", //Green Blue Crayola
           },
+          delete: {
+            main: "#EF4050", //Red Salsa
+            light: "#D01121", //Lava
+          },
+          text: {
+            main: "#000000", //Black
+            light: "#FFFFFF", //White
+          },
+          complete: {
+            main: "#21A179", //Green Munsell
+            light: "#1A936F", //Illuminating Emerald
+          },
+          incomplete: {
+            main: "#DB324D", //Amaranth
+            light: "#A62639", //Crimsom UA
+          },
         },
       }),
     [prefersDarkMode]

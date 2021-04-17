@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === "dark"
         ? theme.palette.secondary.main
         : theme.palette.secondary.light,
+    color:
+      theme.palette.type === "dark"
+        ? theme.palette.text.main
+        : theme.palette.text.light,
   },
 }));
 
@@ -47,6 +51,7 @@ const TaskForm = () => {
 
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
+              color="secondary"
               margin="normal"
               id="date-picker-dialog"
               label="Due Date"

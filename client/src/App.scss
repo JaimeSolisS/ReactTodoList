@@ -27,6 +27,14 @@
     align-items: center;
 }
 
+.task-list {
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+    padding: 5rem 3rem;
+    width: 100%;
+}
+
 .debug {
     border: solid 1px red;
 }
