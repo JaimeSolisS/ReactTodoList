@@ -94,10 +94,22 @@ function Projects(props) {
       </Grid>
 
       <Divider />
-      <Grid container justify="center">
-        <h1>Your Projects</h1>
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid item>
+          <Typography gutterBottom />
+          <Typography variant="h5" gutterBottom>
+            Your Projects
+          </Typography>
+        </Grid>
+        <Grid item>
+          <ProjectList />
+        </Grid>
       </Grid>
-      <ProjectList />
     </div>
   );
 

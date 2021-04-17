@@ -3,6 +3,7 @@ import Task from "./Task";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles((theme) => ({
   delete: {
     background:
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TaskList = () => {
   const classes = useStyles();
+
   const tasks = [
     { name: "Task 1", date: "Mon 19 Apr", status: true },
     { name: "Task 2", date: "Tue 20 Apr", status: true },
@@ -25,6 +27,7 @@ const TaskList = () => {
     { name: "Task 4", date: "Tue 20 Apr", status: false },
     { name: "Task 5", date: "Tue 20 Apr", status: false },
   ];
+
   return (
     <Fragment>
       <Grid
@@ -34,12 +37,16 @@ const TaskList = () => {
         alignItems="center"
       >
         <Grid item>
-          <h2 style={{ margin: "0px" }}>Project: Name</h2>
+          <Typography variant="h3" gutterBottom>
+            Project Name
+          </Typography>
         </Grid>
 
         <Grid item xs={10}>
           {tasks.length === 0 ? (
-            <li>There are no tasks to do</li>
+            <Typography variant="h4" gutterBottom>
+              There are no tasks to do
+            </Typography>
           ) : (
             tasks.map((task) => <Task task={task} />)
           )}

@@ -5,6 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -35,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === "dark"
         ? theme.palette.text.main
         : theme.palette.text.light,
-
   },
 }));
 
@@ -67,7 +67,9 @@ const Register = () => {
         <Avatar className={classes.avatar}>
           <CheckRoundedIcon className={classes.icon} />
         </Avatar>
-        <h1>Sign Up</h1>
+        <Typography variant="h3" gutterBottom>
+          Sign Up
+        </Typography>
         <form onSubmit={onSubmit}>
           <TextField
             variant="outlined"

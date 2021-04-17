@@ -1,5 +1,6 @@
 import React from "react";
 import Project from "./Project";
+import Grid from "@material-ui/core/Grid";
 
 const ProjectList = () => {
   const projects = [
@@ -8,11 +9,11 @@ const ProjectList = () => {
     { name: "🎱 Project 3" },
   ];
   return (
-    <ul style={{ listStyle: "none" }}>
+    <Grid container direction="column" justify="flex-start" alignItems="center">
       {projects.map((project) => (
         <Project project={project} />
       ))}
-    </ul>
+    </Grid>
   );
 };
 

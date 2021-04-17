@@ -50,6 +50,11 @@ const useStyles = makeStyles((theme) => ({
         ? theme.palette.text.main
         : theme.palette.text.light,
   },
+  typography: {
+    button: {
+      textTransform: "none",
+    },
+  },
 }));
 
 const Task = ({ task }) => {
@@ -71,8 +76,9 @@ const Task = ({ task }) => {
               size="small"
               variant="contained"
               className={classes.complete}
+              style={{ textTransform: "none" }}
             >
-              Complete
+              <Typography variant="subtitle2"> Complete</Typography>
             </Button>
           ) : (
             <Button
@@ -81,8 +87,9 @@ const Task = ({ task }) => {
               size="small"
               variant="contained"
               className={classes.incomplete}
+              style={{ textTransform: "none" }}
             >
-              Incomplete
+              <Typography variant="subtitle2"> Incomplete</Typography>
             </Button>
           )}
         </Grid>
