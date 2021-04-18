@@ -9,6 +9,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+import ProjectState from "./context/projects/projectState";
+
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
@@ -49,13 +51,15 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/projects" component={Projects} />
-        </Switch>
-      </BrowserRouter>
+      <ProjectState>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/projects" component={Projects} />
+          </Switch>
+        </BrowserRouter>
+      </ProjectState>
     </ThemeProvider>
   );
 }

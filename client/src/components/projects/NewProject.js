@@ -1,7 +1,9 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
+
+import projectContext from "../../context/projects/projectContext";
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -20,12 +22,19 @@ const useStyles = makeStyles((theme) => ({
 const NewProject = () => {
   const classes = useStyles();
 
+  //Form State
+  const projectsContext = useContext(projectContext);
+  const { newProjectFormSt, showForm } = projectsContext;
+
+  //Project State
   const [project, setProject] = useState({
     name: "",
   });
 
+  //Get project name
   const { name } = project;
 
+  //Get input value
   const onChangeProject = (e) => {
     setProject({
       ...project,
@@ -38,6 +47,12 @@ const NewProject = () => {
     e.preventDefault();
   };
 
+  //Show Form
+
+  const onClickForm = () => {
+    showForm();
+  };
+
   return (
     <Fragment>
       <Button
@@ -46,33 +61,36 @@ const NewProject = () => {
         variant="contained"
         color="secondary"
         className={classes.submit}
+        onClick={onClickForm}
       >
         New Project
       </Button>
 
-      <form className="center-column" onSubmit={onSubmitProject}>
-        <TextField
-          variant="standard"
-          margin="normal"
-          label="Project Name"
-          name="name"
-          autoComplete="name"
-          autoFocus
-          color="secondary"
-          id="name"
-          value={name}
-          onChange={onChangeProject}
-        />
-        <Button
-          type="submit"
-          size="small"
-          variant="contained"
-          color="secondary"
-          className={classes.submit}
-        >
-          Add Project
-        </Button>
-      </form>
+      {newProjectFormSt ? (
+        <form className="center-column" onSubmit={onSubmitProject}>
+          <TextField
+            variant="standard"
+            margin="normal"
+            label="Project Name"
+            name="name"
+            autoComplete="name"
+            autoFocus
+            color="secondary"
+            id="name"
+            value={name}
+            onChange={onChangeProject}
+          />
+          <Button
+            type="submit"
+            size="small"
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+          >
+            Add Project
+          </Button>
+        </form>
+      ) : null}
     </Fragment>
   );
 };
