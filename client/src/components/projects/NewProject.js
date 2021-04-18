@@ -24,7 +24,13 @@ const NewProject = () => {
 
   //Form State
   const projectsContext = useContext(projectContext);
-  const { newProjectFormSt, showForm, addProject } = projectsContext;
+  const {
+    newProjectFormSt,
+    errorFormSt,
+    showForm,
+    addProject,
+    showError,
+  } = projectsContext;
 
   //Project State
   const [project, setProject] = useState({
@@ -49,6 +55,7 @@ const NewProject = () => {
 
     //validate
     if (name === "") {
+      showError();
       return;
     }
 
@@ -92,6 +99,8 @@ const NewProject = () => {
             id="name"
             value={name}
             onChange={onChangeProject}
+            helperText={errorFormSt ? "Please enter a project name!" : ""}
+            error={!!errorFormSt}
           />
           <Button
             type="submit"
