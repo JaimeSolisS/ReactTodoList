@@ -24,7 +24,7 @@ const NewProject = () => {
 
   //Form State
   const projectsContext = useContext(projectContext);
-  const { newProjectFormSt, showForm } = projectsContext;
+  const { newProjectFormSt, showForm, addProject } = projectsContext;
 
   //Project State
   const [project, setProject] = useState({
@@ -43,12 +43,25 @@ const NewProject = () => {
     //console.log(project.name);
   };
 
+  //New Project
   const onSubmitProject = (e) => {
     e.preventDefault();
+
+    //validate
+    if (name === "") {
+      return;
+    }
+
+    //add to state
+    addProject(project);
+
+    //empty form
+    setProject({
+      name: "",
+    });
   };
 
   //Show Form
-
   const onClickForm = () => {
     showForm();
   };
