@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import projectContext from "../../context/projects/projectContext";
+import taskContext from "../../context/tasks/taskContext";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -26,24 +27,72 @@ const useStyles = makeStyles((theme) => ({
 
 const TaskForm = () => {
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
 
   //Extract if a project is selected
   const projectsContext = useContext(projectContext);
   const { project } = projectsContext;
 
+  //Tasks
+  const tasksContext = useContext(taskContext);
+  const { error, addTask, validateTask, getTasks } = tasksContext;
+
+  //Form state
+  const [task, setTask] = useState({
+    name: "",
+    date: "",
+  });
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   // If there's no selected project
   if (!project) return null;
+
+  const [actualProject] = project;
+
+  //extract name
+  const { name } = task;
+
+  const handleChange = (e) => {
+    setTask({
+      ...task,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    //validation
+    if (name === "") {
+      validateTask();
+      return;
+    }
+    //add new task to state
+    task.projectId = actualProject.id;
+    task.state = false;
+
+    if (selectedDate == null) task.date = selectedDate;
+    else task.date = moment(selectedDate).format("ddd D MMM ");
+
+    addTask(task);
+
+    getTasks(actualProject.id);
+
+    //clear form
+    setTask({
+      name: "",
+    });
+  };
 
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <div style={{ width: "50%" }}>
-        <form className="center-column">
+        <form className="center-column" onSubmit={onSubmit}>
           <TextField
             fullWidth
             variant="standard"
@@ -54,11 +103,16 @@ const TaskForm = () => {
             autoFocus
             color="secondary"
             id="name"
+            value={name}
+            onChange={handleChange}
+            helperText={error ? "Please enter a name for the task!" : ""}
+            error={!!error}
           />
 
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               color="secondary"
+              // variant="inline"
               margin="normal"
               id="date-picker-dialog"
               label="Due Date"

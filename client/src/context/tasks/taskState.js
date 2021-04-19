@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { TASKS_PROJECT } from "../../types";
+import { TASKS_PROJECT, ADD_TASK, VALIDATE_TASK } from "../../types";
 import taskContext from "./taskContext";
 import taskReducer from "./taskReducer";
 
@@ -13,6 +13,7 @@ const TaskState = (props) => {
       { name: "Task 5", date: "Tue 20 Apr", status: false, projectId: 2 },
     ],
     tasksProjectSt: null,
+    error: false,
   };
 
   // create dispatch & state
@@ -27,14 +28,33 @@ const TaskState = (props) => {
     });
   };
 
+  //add task to project
+  const addTask = (task) => {
+    dispatch({
+      type: ADD_TASK,
+      payload: task,
+    });
+  };
+
+  //validate task
+
+  const validateTask = () => {
+    dispatch({
+      type: VALIDATE_TASK,
+    });
+  };
+
   return (
     <taskContext.Provider
       value={{
         //states
         tasks: state.tasks,
         tasksProjectSt: state.tasksProjectSt,
+        error: state.error,
         //functions
         getTasks,
+        addTask,
+        validateTask,
       }}
     >
       {props.children}
