@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import projectContext from "../../context/projects/projectContext";
+import taskContext from "../../context/tasks/taskContext";
 
 const useStyles = makeStyles((theme) => ({
   delete: {
@@ -26,6 +27,10 @@ const TaskList = () => {
   const projectsContext = useContext(projectContext);
   const { project, deleteProject } = projectsContext;
 
+  //Get project's tasks
+  const tasksContext = useContext(taskContext);
+  const { tasksProjectSt } = tasksContext;
+
   // If there's no selected project
   if (!project)
     return (
@@ -40,14 +45,6 @@ const TaskList = () => {
 
   //extract selected project -->Error when there's no selected project
   const [actualProject] = project;
-
-  const tasks = [
-    { name: "Task 1", date: "Mon 19 Apr", status: true },
-    { name: "Task 2", date: "Tue 20 Apr", status: true },
-    { name: "Task 3", date: "Tue 20 Apr", status: true },
-    { name: "Task 4", date: "Tue 20 Apr", status: false },
-    { name: "Task 5", date: "Tue 20 Apr", status: false },
-  ];
 
   const onClickDelete = () => {
     deleteProject(actualProject.id);
@@ -68,12 +65,12 @@ const TaskList = () => {
         </Grid>
 
         <Grid item xs={10}>
-          {tasks.length === 0 ? (
+          {tasksProjectSt.length === 0 ? (
             <Typography variant="h4" gutterBottom>
               There are no tasks to do
             </Typography>
           ) : (
-            tasks.map((task) => <Task task={task} />)
+            tasksProjectSt.map((task) => <Task task={task} />)
           )}
         </Grid>
         <Grid item>
