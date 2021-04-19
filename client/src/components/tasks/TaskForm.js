@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
@@ -8,6 +8,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import projectContext from "../../context/projects/projectContext";
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -25,11 +26,17 @@ const useStyles = makeStyles((theme) => ({
 
 const TaskForm = () => {
   const classes = useStyles();
-
   const [selectedDate, setSelectedDate] = React.useState(new Date());
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
+
+  //Extract if a project is selected
+  const projectsContext = useContext(projectContext);
+  const { project } = projectsContext;
+
+  // If there's no selected project
+  if (!project) return null;
 
   return (
     <div

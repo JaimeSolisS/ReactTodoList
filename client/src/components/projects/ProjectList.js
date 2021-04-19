@@ -3,6 +3,7 @@ import Project from "./Project";
 import Grid from "@material-ui/core/Grid";
 import projectContext from "../../context/projects/projectContext";
 import { GET_PROJECTS } from "../../types";
+import { Typography } from "@material-ui/core";
 
 const ProjectList = () => {
   //Get projects from state
@@ -15,7 +16,16 @@ const ProjectList = () => {
   }, []);
 
   //Check if there are projects
-  if (projects.length === 0) return null;
+  if (projects.length === 0)
+    return (
+      <Grid container direction="column" alignItems="center">
+        <Grid item>
+          <Typography variant="subtle1" gutterBottom>
+            You have no projects
+          </Typography>
+        </Grid>
+      </Grid>
+    );
 
   return (
     <Grid container direction="column" justify="flex-start" alignItems="center">

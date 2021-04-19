@@ -7,6 +7,8 @@ import {
   GET_PROJECTS,
   ADD_PROJECT,
   VALIDATE_FORM,
+  ACTUAL_PROJECT,
+  DELETE_PROJECT,
 } from "../../types";
 
 const ProjectState = (props) => {
@@ -21,6 +23,7 @@ const ProjectState = (props) => {
     projects: [],
     newProjectFormSt: false,
     errorFormSt: false,
+    project: null,
   };
 
   //Actions Dispatch
@@ -60,6 +63,22 @@ const ProjectState = (props) => {
     });
   };
 
+  //Select Project
+  const actualProject = (projectId) => {
+    dispatch({
+      type: ACTUAL_PROJECT,
+      payload: projectId,
+    });
+  };
+
+  //Delete project
+  const deleteProject = (projectId) => {
+    dispatch({
+      type: DELETE_PROJECT,
+      payload: projectId,
+    });
+  };
+
   return (
     <projectContext.Provider
       value={{
@@ -67,11 +86,14 @@ const ProjectState = (props) => {
         projects: state.projects,
         newProjectFormSt: state.newProjectFormSt,
         errorFormSt: state.errorFormSt,
+        project: state.project,
         //function
         showForm,
         getProjects,
         addProject,
         showError,
+        actualProject,
+        deleteProject,
       }}
     >
       {props.children}{" "}
