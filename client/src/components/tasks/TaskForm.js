@@ -101,11 +101,16 @@ const TaskForm = () => {
       task.dateObj = selectedDate; //for edition
 
       addTask(task);
+      handleDateChange(null); //clear datepicker
     } else {
-      if (selectedDate == null) task.date = selectedDate;
-      else task.date = moment(selectedDate).format("ddd D MMM ");
+      //if (selectedDate == null) task.date = selectedDate;
+      //else task.date = moment(selectedDate).format("ddd D MMM ");
+      //task.dateObj = selectedDate; //for edition
+      if (selectedDate != null)
+        task.date = moment(selectedDate).format("ddd D MMM ");
       task.dateObj = selectedDate; //for edition
       updateTask(task);
+      handleDateChange(null); //clear datepicker
     }
 
     getTasks(actualProject.id);
