@@ -10,6 +10,7 @@ import {
 } from "../../types";
 import taskContext from "./taskContext";
 import taskReducer from "./taskReducer";
+import { v4 as uuid } from "uuid";
 
 const TaskState = (props) => {
   const initialState = {
@@ -51,6 +52,7 @@ const TaskState = (props) => {
 
   //add task to project
   const addTask = (task) => {
+    task.id = uuid();
     dispatch({
       type: ADD_TASK,
       payload: task,
