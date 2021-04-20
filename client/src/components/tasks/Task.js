@@ -96,7 +96,7 @@ const Task = ({ task }) => {
   return (
     <Paper className={classes.paper}>
       <Grid container justify="space-between" alignItems="center" spacing={5}>
-        <Grid item xs direction="collumn">
+        <Grid item xs>
           <Typography variant="subtitle1"> {task.name} </Typography>{" "}
           <Typography variant="body2" color="textSecondary">
             {" "}

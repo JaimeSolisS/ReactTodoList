@@ -8,7 +8,7 @@ import {
   STATUS_TASK,
 } from "../../types";
 
-export default (state, action) => {
+const taskReducer = (state, action) => {
   switch (action.type) {
     case TASKS_PROJECT:
       return {
@@ -59,3 +59,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default taskReducer;

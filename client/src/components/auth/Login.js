@@ -94,7 +94,6 @@ const Login = () => {
             name="password"
             label="Password"
             type="password"
-            id="password"
             autoComplete="current-password"
             color="secondary"
             onChange={onChange}

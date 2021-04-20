@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import Project from "./Project";
 import Grid from "@material-ui/core/Grid";
 import projectContext from "../../context/projects/projectContext";
-import { GET_PROJECTS } from "../../types";
 import { Typography } from "@material-ui/core";
 
 const ProjectList = () => {
@@ -13,6 +12,8 @@ const ProjectList = () => {
   //Get projects on load
   useEffect(() => {
     getProjects();
+    //for  React Hook useEffect has a missing dependency: 'getProjects'.
+    // eslint-disable-next-line
   }, []);
 
   //Check if there are projects
@@ -20,7 +21,7 @@ const ProjectList = () => {
     return (
       <Grid container direction="column" alignItems="center">
         <Grid item>
-          <Typography variant="subtle1" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             You have no projects
           </Typography>
         </Grid>
