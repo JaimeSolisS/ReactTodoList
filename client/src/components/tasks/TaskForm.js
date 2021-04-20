@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
@@ -34,12 +34,31 @@ const TaskForm = () => {
 
   //Tasks
   const tasksContext = useContext(taskContext);
-  const { error, addTask, validateTask, getTasks } = tasksContext;
+  const {
+    error,
+    selectedTaskSt,
+    addTask,
+    validateTask,
+    getTasks,
+    updateTask,
+  } = tasksContext;
+
+  useEffect(() => {
+    if (selectedTaskSt !== null) {
+      setTask(selectedTaskSt);
+      setSelectedDate(selectedTaskSt.dateObj);
+    } else
+      setTask({
+        name: "",
+        date: "",
+      });
+  }, [selectedTaskSt]);
 
   //Form state
   const [task, setTask] = useState({
     name: "",
     date: "",
+    dateObj: "",
   });
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -70,14 +89,24 @@ const TaskForm = () => {
       validateTask();
       return;
     }
-    //add new task to state
-    task.projectId = actualProject.id;
-    task.state = false;
 
-    if (selectedDate == null) task.date = selectedDate;
-    else task.date = moment(selectedDate).format("ddd D MMM ");
+    //Check if it's a new task or an edit because it adds a new task when edit
+    if (selectedTaskSt === null) {
+      //add new task to state
+      task.projectId = actualProject.id;
+      task.state = false;
 
-    addTask(task);
+      if (selectedDate == null) task.date = selectedDate;
+      else task.date = moment(selectedDate).format("ddd D MMM ");
+      task.dateObj = selectedDate; //for edition
+
+      addTask(task);
+    } else {
+      if (selectedDate == null) task.date = selectedDate;
+      else task.date = moment(selectedDate).format("ddd D MMM ");
+      task.dateObj = selectedDate; //for edition
+      updateTask(task);
+    }
 
     getTasks(actualProject.id);
 
@@ -133,7 +162,7 @@ const TaskForm = () => {
             color="secondary"
             className={classes.submit}
           >
-            Add Task
+            {selectedTaskSt ? "Save Task" : "Add Task"}
           </Button>
         </form>
       </div>
