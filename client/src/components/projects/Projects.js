@@ -82,12 +82,9 @@ function Projects(props) {
           </Avatar>
         </Grid>
       </div>
-      <Divider />
-      <Grid container justify="center">
-        <NewProject />
-      </Grid>
 
       <Divider />
+
       <Grid
         container
         direction="column"
@@ -95,11 +92,24 @@ function Projects(props) {
         alignItems="center"
       >
         <Grid item>
-          <Typography gutterBottom />
-          <Typography variant="h5" gutterBottom>
-            Your Projects
-          </Typography>
+          <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+          >
+            <Grid item xs={6}>
+              <Typography gutterBottom />
+              <Typography variant="h5" gutterBottom>
+                Projects
+              </Typography>
+            </Grid>
+            <Grid item>
+              <NewProject />
+            </Grid>
+          </Grid>
         </Grid>
+
         <Grid item>
           <ProjectList />
         </Grid>

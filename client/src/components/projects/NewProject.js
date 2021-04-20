@@ -2,6 +2,9 @@ import React, { Fragment, useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
+import Grid from "@material-ui/core/Grid";
 
 import projectContext from "../../context/projects/projectContext";
 
@@ -75,44 +78,47 @@ const NewProject = () => {
 
   return (
     <Fragment>
-      <Button
-        type="button"
-        size="small"
-        variant="contained"
-        color="secondary"
-        className={classes.submit}
-        onClick={onClickForm}
-      >
-        New Project
-      </Button>
-
-      {newProjectFormSt ? (
-        <form className="center-column" onSubmit={onSubmitProject}>
-          <TextField
-            variant="standard"
-            margin="normal"
-            label="Project Name"
-            name="name"
-            autoComplete="name"
-            autoFocus
-            color="secondary"
-            id="name"
-            value={name}
-            onChange={onChangeProject}
-            helperText={errorFormSt ? "Please enter a project name!" : ""}
-            error={!!errorFormSt}
-          />
-          <Button
-            type="submit"
-            size="small"
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
+      <Grid container direction="column" justify="center" alignItems="center">
+        <Grid item>
+          <IconButton
+            className={classes.complete}
+            type="button"
+            onClick={onClickForm}
           >
-            Add Project
-          </Button>
-        </form>
-      ) : null}
+            <AddRoundedIcon fontSize="large" />
+          </IconButton>
+        </Grid>
+
+        <Grid item>
+          {newProjectFormSt ? (
+            <form className="center-column" onSubmit={onSubmitProject}>
+              <TextField
+                variant="standard"
+                margin="normal"
+                label="Project Name"
+                name="name"
+                autoComplete="name"
+                autoFocus
+                color="secondary"
+                id="name"
+                value={name}
+                onChange={onChangeProject}
+                helperText={errorFormSt ? "Please enter a project name!" : ""}
+                error={!!errorFormSt}
+              />
+              <Button
+                type="submit"
+                size="small"
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
+                Add Project
+              </Button>
+            </form>
+          ) : null}
+        </Grid>
+      </Grid>
     </Fragment>
   );
 };

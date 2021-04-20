@@ -2,12 +2,12 @@ import React, { Fragment, useContext } from "react";
 import Task from "./Task";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import projectContext from "../../context/projects/projectContext";
 import taskContext from "../../context/tasks/taskContext";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
   delete: {
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
       theme.palette.type === "dark"
         ? theme.palette.text.main
         : theme.palette.text.light,
+    margin: theme.spacing(5),
   },
 }));
 
@@ -55,43 +56,40 @@ const TaskList = () => {
 
   return (
     <Fragment>
-      <Container>
-        <Grid
-          container
-          direction="column"
-          justify="flex-start"
-          alignItems="center"
-        >
+      <Grid
+        container
+        direction="column"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid item>
           <Grid item>
             <Typography variant="h3" gutterBottom>
               {actualProject.name}
             </Typography>
           </Grid>
-
-          <Grid item xs={10}>
-            {tasksProjectSt.length === 0 ? (
-              <Typography variant="h4" gutterBottom>
-                There are no tasks to do
-              </Typography>
-            ) : (
-              tasksProjectSt.map((task) => <Task key={task.id} task={task} />)
-            )}
-          </Grid>
-          <Grid item>
-            <Button
-              fullWidth
-              type="submit"
-              size="small"
-              variant="contained"
-              className={classes.delete}
-              startIcon={<DeleteForeverRoundedIcon />}
-              onClick={onClickDelete}
-            >
-              Delete Project
-            </Button>
-          </Grid>
         </Grid>
-      </Container>
+
+        <Grid item xs={10}>
+          {tasksProjectSt.length === 0 ? (
+            <Typography variant="h4" gutterBottom>
+              There are no tasks to do
+            </Typography>
+          ) : (
+            tasksProjectSt.map((task) => <Task key={task.id} task={task} />)
+          )}
+        </Grid>
+        <Grid item>
+          <IconButton
+            aria-label="delete"
+            type="submit"
+            className={classes.delete}
+            onClick={onClickDelete}
+          >
+            <DeleteForeverRoundedIcon fontSize="large" />
+          </IconButton>
+        </Grid>
+      </Grid>
     </Fragment>
   );
 };

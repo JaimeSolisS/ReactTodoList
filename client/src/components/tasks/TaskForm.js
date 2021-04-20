@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -127,48 +128,71 @@ const TaskForm = () => {
     >
       <div style={{ width: "50%" }}>
         <form className="center-column" onSubmit={onSubmit}>
-          <TextField
-            fullWidth
-            variant="standard"
-            margin="normal"
-            label="Task Name"
-            name="name"
-            autoComplete="name"
-            autoFocus
-            color="secondary"
-            id="name"
-            value={name}
-            onChange={handleChange}
-            helperText={error ? "Please enter a name for the task!" : ""}
-            error={!!error}
-          />
-
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              color="secondary"
-              // variant="inline"
-              margin="normal"
-              id="date-picker-dialog"
-              label="Due Date"
-              format="MM/dd/yyyy"
-              value={selectedDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                "aria-label": "change date",
-              }}
-            />
-          </MuiPickersUtilsProvider>
-
-          <Button
-            fullWidth
-            type="submit"
-            size="small"
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
+          <Grid
+            container
+            direction="column"
+            justify="flex-start"
+            alignItems="center"
           >
-            {selectedTaskSt ? "Save Task" : "Add Task"}
-          </Button>
+            <Grid item>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+                spacing={3}
+              >
+                <Grid item xs={12} md={7}>
+                  <TextField
+                    fullWidth
+                    variant="standard"
+                    margin="normal"
+                    label="Task Name"
+                    name="name"
+                    autoComplete="name"
+                    autoFocus
+                    color="secondary"
+                    id="name"
+                    value={name}
+                    onChange={handleChange}
+                    helperText={
+                      error ? "Please enter a name for the task!" : ""
+                    }
+                    error={!!error}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                      color="secondary"
+                      // variant="inline"
+                      margin="normal"
+                      id="date-picker-dialog"
+                      label="Due Date"
+                      format="MM/dd/yyyy"
+                      value={selectedDate}
+                      onChange={handleDateChange}
+                      KeyboardButtonProps={{
+                        "aria-label": "change date",
+                      }}
+                    />
+                  </MuiPickersUtilsProvider>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Button
+                  fullWidth
+                  type="submit"
+                  size="small"
+                  variant="contained"
+                  color="secondary"
+                  className={classes.submit}
+                >
+                  {selectedTaskSt ? "Save Task" : "Add Task"}
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
         </form>
       </div>
     </div>
