@@ -16,6 +16,7 @@ const taskReducer = (state, action) => {
         tasksProjectSt: state.tasks.filter(
           (task) => task.projectId === action.payload
         ),
+        selectedTaskSt: null,
       };
     case ADD_TASK:
       return {

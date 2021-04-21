@@ -8,6 +8,12 @@ import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import projectContext from "../../context/projects/projectContext";
 import taskContext from "../../context/tasks/taskContext";
 import IconButton from "@material-ui/core/IconButton";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import TaskForm from "../tasks/TaskForm";
+import Button from "@material-ui/core/Button";
+import AddRoundedIcon from "@material-ui/icons/AddRounded";
 
 const useStyles = makeStyles((theme) => ({
   delete: {
@@ -21,9 +27,36 @@ const useStyles = makeStyles((theme) => ({
         : theme.palette.text.light,
     margin: theme.spacing(5),
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    background:
+      theme.palette.type === "dark"
+        ? theme.palette.secondary.main
+        : theme.palette.secondary.light,
+  },
 }));
 
 const TaskList = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const classes = useStyles();
   //Get projects from state
   const projectsContext = useContext(projectContext);
@@ -78,6 +111,37 @@ const TaskList = () => {
           ) : (
             tasksProjectSt.map((task) => <Task key={task.id} task={task} />)
           )}
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            size="large"
+            className={classes.submit}
+            startIcon={<AddRoundedIcon />}
+            onClick={handleOpen}
+          >
+            Add task
+          </Button>
+
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={open}>
+              <div className={classes.paper}>
+                <h2 id="transition-modal-title">New Task</h2>
+                <TaskForm />
+              </div>
+            </Fade>
+          </Modal>
         </Grid>
         <Grid item>
           <IconButton

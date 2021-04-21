@@ -16,7 +16,7 @@ import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import MeetingRoomRoundedIcon from "@material-ui/icons/MeetingRoomRounded";
-import TaskForm from "../tasks/TaskForm";
+
 import TaskList from "../tasks/TaskList";
 
 const drawerWidth = 240;
@@ -182,7 +182,7 @@ function Projects(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {/* --------------------------CONTENT ----------------------------*/}
-        <TaskForm />
+
         <TaskList />
       </main>
     </div>

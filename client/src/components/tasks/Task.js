@@ -10,6 +10,11 @@ import projectContext from "../../context/projects/projectContext";
 import IconButton from "@material-ui/core/IconButton";
 import RadioButtonUncheckedRoundedIcon from "@material-ui/icons/RadioButtonUncheckedRounded";
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import TaskForm from "../tasks/TaskForm";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -49,9 +54,30 @@ const useStyles = makeStyles((theme) => ({
       textTransform: "none",
     },
   },
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paperModal: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
 
 const Task = ({ task }) => {
+  //For modal
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    // selectTask(null);
+  };
+
   //Extract if a project is selected
   const projectsContext = useContext(projectContext);
   const { project } = projectsContext;
@@ -71,6 +97,7 @@ const Task = ({ task }) => {
   //Edit Task
   const selectTask = (task) => {
     editTask(task);
+    handleOpen();
   };
 
   const changeStatus = (task) => {
@@ -113,30 +140,75 @@ const Task = ({ task }) => {
           <Grid
             container
             direction="row"
-            justify="flex-start"
+            justify="flex-end"
             alignItems="center"
-            spacing={1}
           >
             <Grid item>
-              <IconButton
-                aria-label="delete"
-                type="submit"
-                className={classes.edit}
-                onClick={() => selectTask(task)}
+              <ButtonGroup
+                variant="text"
+                aria-label="text primary button group"
               >
-                <CreateRoundedIcon fontSize="large" />
-              </IconButton>
+                <Grid
+                  container
+                  direction="column"
+                  justify="flex-start"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <IconButton
+                      aria-label="delete"
+                      type="submit"
+                      className={classes.edit}
+                      onClick={() => selectTask(task)}
+                    >
+                      <CreateRoundedIcon fontSize="large" />
+                    </IconButton>
+                    <Modal
+                      aria-labelledby="transition-modal-title"
+                      aria-describedby="transition-modal-description"
+                      className={classes.modal}
+                      open={open}
+                      onClose={handleClose}
+                      closeAfterTransition
+                      BackdropComponent={Backdrop}
+                      BackdropProps={{
+                        timeout: 500,
+                      }}
+                    >
+                      <Fade in={open}>
+                        <div className={classes.paperModal}>
+                          <h2 id="transition-modal-title">Edit Task</h2>
+                          <TaskForm />
+                        </div>
+                      </Fade>
+                    </Modal>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="caption">Edit</Typography>
+                  </Grid>
+                </Grid>
+                <Grid
+                  container
+                  direction="column"
+                  justify="flex-start"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <IconButton
+                      aria-label="delete"
+                      type="submit"
+                      className={classes.delete}
+                      onClick={() => deleteTaskFn(task.id)}
+                    >
+                      <DeleteRoundedIcon fontSize="large" />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="caption">Delete</Typography>
+                  </Grid>
+                </Grid>
+              </ButtonGroup>
             </Grid>
-            <Grid item>
-              <IconButton
-                aria-label="delete"
-                type="submit"
-                className={classes.delete}
-                onClick={() => deleteTaskFn(task.id)}
-              >
-                <DeleteRoundedIcon fontSize="large" />
-              </IconButton>
-            </Grid>{" "}
           </Grid>{" "}
         </Grid>{" "}
       </Grid>{" "}

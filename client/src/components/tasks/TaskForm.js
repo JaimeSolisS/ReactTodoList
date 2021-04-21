@@ -142,7 +142,7 @@ const TaskForm = () => {
                 alignItems="flex-start"
                 spacing={3}
               >
-                <Grid item xs={12} md={7}>
+                <Grid item xs={12} md={12}>
                   <TextField
                     fullWidth
                     variant="standard"
@@ -161,7 +161,7 @@ const TaskForm = () => {
                     error={!!error}
                   />
                 </Grid>
-                <Grid item xs={12} md={5}>
+                <Grid item xs={12} md={12}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
                       color="secondary"
@@ -181,7 +181,6 @@ const TaskForm = () => {
               </Grid>
               <Grid item>
                 <Button
-                  fullWidth
                   type="submit"
                   size="small"
                   variant="contained"
