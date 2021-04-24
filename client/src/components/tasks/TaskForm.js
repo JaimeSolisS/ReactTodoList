@@ -127,7 +127,7 @@ const TaskForm = (props) => {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <div style={{ width: "50%" }}>
-        <form className="center-column" onSubmit={onSubmit}>
+        <form onSubmit={onSubmit}>
           <Grid
             container
             direction="column"

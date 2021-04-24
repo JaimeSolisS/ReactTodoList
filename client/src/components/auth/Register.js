@@ -6,6 +6,7 @@ import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -37,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
         ? theme.palette.text.main
         : theme.palette.text.light,
   },
+  grid: {
+    height: "75vh",
+  },
 }));
 
 const Register = () => {
@@ -62,14 +66,24 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
-      <div className="container-form">
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+      className={classes.grid}
+    >
+      <Grid item>
         <Avatar className={classes.avatar}>
           <CheckRoundedIcon className={classes.icon} />
         </Avatar>
+      </Grid>
+      <Grid item>
         <Typography variant="h3" gutterBottom>
           Sign Up
         </Typography>
+      </Grid>
+      <Grid item>
         <form onSubmit={onSubmit}>
           <TextField
             variant="outlined"
@@ -123,12 +137,14 @@ const Register = () => {
             Sign up
           </Button>
         </form>
+      </Grid>
+      <Grid item>
         <Link to="/" className={classes.textField}>
           {" "}
           Already have an account? Sign in
         </Link>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

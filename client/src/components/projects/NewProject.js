@@ -89,35 +89,44 @@ const NewProject = () => {
           </IconButton>
         </Grid>
 
-        <Grid item>
-          {newProjectFormSt ? (
-            <form className="center-column" onSubmit={onSubmitProject}>
-              <TextField
-                variant="standard"
-                margin="normal"
-                label="Project Name"
-                name="name"
-                autoComplete="name"
-                autoFocus
-                color="secondary"
-                id="name"
-                value={name}
-                onChange={onChangeProject}
-                helperText={errorFormSt ? "Please enter a project name!" : ""}
-                error={!!errorFormSt}
-              />
-              <Button
-                type="submit"
-                size="small"
-                variant="contained"
-                color="secondary"
-                className={classes.submit}
-              >
-                Add Project
-              </Button>
-            </form>
-          ) : null}
-        </Grid>
+        {newProjectFormSt ? (
+          <form onSubmit={onSubmitProject}>
+            <Grid
+              container
+              direction="column"
+              justify="flex-start"
+              alignItems="center"
+            >
+              <Grid item>
+                <TextField
+                  variant="standard"
+                  margin="normal"
+                  label="Project Name"
+                  name="name"
+                  autoComplete="name"
+                  autoFocus
+                  color="secondary"
+                  id="name"
+                  value={name}
+                  onChange={onChangeProject}
+                  helperText={errorFormSt ? "Please enter a project name!" : ""}
+                  error={!!errorFormSt}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  type="submit"
+                  size="small"
+                  variant="contained"
+                  color="secondary"
+                  className={classes.submit}
+                >
+                  Add Project
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        ) : null}
       </Grid>
     </Fragment>
   );

@@ -6,6 +6,7 @@ import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -37,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
         ? theme.palette.text.main
         : theme.palette.text.light,
   },
+  grid: {
+    height: "75vh",
+  },
 }));
 
 const Login = () => {
@@ -61,14 +65,26 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="container-form">
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+      className={classes.grid}
+    >
+      <Grid item>
         <Avatar className={classes.avatar}>
           <CheckRoundedIcon className={classes.icon} />
         </Avatar>
+      </Grid>
+
+      <Grid item>
         <Typography variant="h3" gutterBottom>
           Log In
         </Typography>
+      </Grid>
+
+      <Grid item>
         <form onSubmit={onSubmit}>
           <TextField
             variant="outlined"
@@ -84,6 +100,7 @@ const Login = () => {
             color="secondary"
             onChange={onChange}
           />
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -98,22 +115,27 @@ const Login = () => {
             color="secondary"
             onChange={onChange}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
-          >
-            Log in
-          </Button>
+
+          <Link to="/projects" style={{ textDecoration: "none" }}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Log in
+            </Button>
+          </Link>
         </form>
+      </Grid>
+      <Grid item>
         <Link to="/register" className={classes.textField}>
           {" "}
           Don't have an account? Sign Up
         </Link>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 
