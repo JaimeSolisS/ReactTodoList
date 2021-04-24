@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TaskForm = () => {
+const TaskForm = (props) => {
   const classes = useStyles();
 
   //Extract if a project is selected
@@ -186,6 +186,7 @@ const TaskForm = () => {
                   variant="contained"
                   color="secondary"
                   className={classes.submit}
+                  onClick={props.onCloseModal}
                 >
                   {selectedTaskSt ? "Save Task" : "Add Task"}
                 </Button>

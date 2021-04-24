@@ -74,10 +74,13 @@ const Task = ({ task }) => {
     setOpen(true);
   };
   const handleClose = () => {
+    selectTask(null);
     setOpen(false);
-    // selectTask(null);
   };
 
+  const handleCloseSave = () => {
+    setOpen(false);
+  };
   //Extract if a project is selected
   const projectsContext = useContext(projectContext);
   const { project } = projectsContext;
@@ -178,7 +181,7 @@ const Task = ({ task }) => {
                       <Fade in={open}>
                         <div className={classes.paperModal}>
                           <h2 id="transition-modal-title">Edit Task</h2>
-                          <TaskForm />
+                          <TaskForm onCloseModal={handleCloseSave} />
                         </div>
                       </Fade>
                     </Modal>
