@@ -12,12 +12,7 @@ import {
 } from "../../types";
 
 const ProjectState = (props) => {
-  const projects = [
-    { id: 1, name: " Project 1 😎" },
-    { id: 2, name: "Project 2 🚀 " },
-    { id: 3, name: "Project 3 🎱 " },
-    { id: 4, name: "Project 4 ✈️ " },
-  ];
+  const projects = [{ id: 1, name: " Welcome 👋" }];
 
   const initialState = {
     projects: [],

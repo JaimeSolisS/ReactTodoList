@@ -15,22 +15,54 @@ import { v4 as uuid } from "uuid";
 const TaskState = (props) => {
   const initialState = {
     tasks: [
-      { id: 1, name: "Task 1", date: "Mon 19 Apr", status: true, projectId: 1 },
-      { id: 2, name: "Task 2", date: "Tue 20 Apr", status: true, projectId: 2 },
-      { id: 3, name: "Task 3", date: "Tue 20 Apr", status: true, projectId: 3 },
+      {
+        id: 1,
+        name: "This task is completed ☑️",
+        status: true,
+        projectId: 1,
+      },
+      {
+        id: 2,
+        name: "Click the ⭕️ to mark this task as completed",
+        status: false,
+        projectId: 1,
+      },
+
+      {
+        id: 3,
+        name: "Add a new task ➕",
+        status: false,
+        projectId: 1,
+      },
       {
         id: 4,
-        name: "Task 4",
-        date: "Tue 20 Apr",
+        name: "Edit this task's name ✏️ ",
         status: false,
-        projectId: 4,
+        projectId: 1,
       },
       {
         id: 5,
-        name: "Task 5",
-        date: "Tue 20 Apr",
+        name: "Schedule this task 📅",
         status: false,
-        projectId: 2,
+        projectId: 1,
+      },
+      {
+        id: 6,
+        name: "Delete this task 🗑",
+        status: false,
+        projectId: 1,
+      },
+      {
+        id: 7,
+        name: "Click ➕ next to Projects to add one of your own",
+        status: false,
+        projectId: 1,
+      },
+      {
+        id: 8,
+        name: "Click 🗑 below to delete this project",
+        status: false,
+        projectId: 1,
       },
     ],
     tasksProjectSt: null,
