@@ -16,6 +16,7 @@ import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import MeetingRoomRoundedIcon from "@material-ui/icons/MeetingRoomRounded";
+import { Link } from "react-router-dom";
 
 import TaskList from "../tasks/TaskList";
 
@@ -139,12 +140,12 @@ function Projects(props) {
             <Typography variant="h6" noWrap>
               Hey User
             </Typography>
-            <a href="Login" style={{ textDecoration: "none", color: "white" }}>
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
               <Grid container justify="space-between">
                 <MeetingRoomRoundedIcon />
                 <Typography variant="h6">Sign out</Typography>
               </Grid>
-            </a>
+            </Link>
           </Grid>
         </Toolbar>
       </AppBar>

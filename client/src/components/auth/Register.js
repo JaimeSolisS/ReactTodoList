@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField } from "@material-ui/core";
+import { Container, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         : theme.palette.text.light,
   },
   grid: {
-    height: "75vh",
+    height: "80vh",
   },
 }));
 
@@ -66,85 +66,92 @@ const Register = () => {
   };
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
-      className={classes.grid}
-    >
-      <Grid item>
-        <Avatar className={classes.avatar}>
-          <CheckRoundedIcon className={classes.icon} />
-        </Avatar>
+    <Container>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        className={classes.grid}
+      >
+        <Grid item>
+          <Avatar className={classes.avatar}>
+            <CheckRoundedIcon className={classes.icon} />
+          </Avatar>
+        </Grid>
+
+        <Grid item>
+          <Typography variant="h3" gutterBottom>
+            Sign Up
+          </Typography>
+        </Grid>
+
+        <Grid item>
+          <form onSubmit={onSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              value={username}
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              color="secondary"
+              onChange={onChange}
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              value={email}
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              color="secondary"
+              onChange={onChange}
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="password"
+              value={password}
+              name="password"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              color="secondary"
+              onChange={onChange}
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Sign up
+            </Button>
+          </form>
+        </Grid>
+        <Grid item>
+          <Link to="/" className={classes.textField}>
+            {" "}
+            Already have an account? Sign in
+          </Link>
+        </Grid>
       </Grid>
-      <Grid item>
-        <Typography variant="h3" gutterBottom>
-          Sign Up
-        </Typography>
-      </Grid>
-      <Grid item>
-        <form onSubmit={onSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            value={username}
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            color="secondary"
-            onChange={onChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            value={email}
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            color="secondary"
-            onChange={onChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="passoword"
-            value={password}
-            name="password"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            color="secondary"
-            onChange={onChange}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="secondary"
-            className={classes.submit}
-          >
-            Sign up
-          </Button>
-        </form>
-      </Grid>
-      <Grid item>
-        <Link to="/" className={classes.textField}>
-          {" "}
-          Already have an account? Sign in
-        </Link>
-      </Grid>
-    </Grid>
+    </Container>
   );
 };
 

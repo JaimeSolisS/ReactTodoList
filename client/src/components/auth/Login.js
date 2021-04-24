@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField } from "@material-ui/core";
+import { Container, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
@@ -65,77 +65,79 @@ const Login = () => {
   };
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
-      className={classes.grid}
-    >
-      <Grid item>
-        <Avatar className={classes.avatar}>
-          <CheckRoundedIcon className={classes.icon} />
-        </Avatar>
-      </Grid>
+    <Container>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        className={classes.grid}
+      >
+        <Grid item>
+          <Avatar className={classes.avatar}>
+            <CheckRoundedIcon className={classes.icon} />
+          </Avatar>
+        </Grid>
 
-      <Grid item>
-        <Typography variant="h3" gutterBottom>
-          Log In
-        </Typography>
-      </Grid>
+        <Grid item>
+          <Typography variant="h3" gutterBottom>
+            Log In
+          </Typography>
+        </Grid>
 
-      <Grid item>
-        <form onSubmit={onSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            value={email}
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            color="secondary"
-            onChange={onChange}
-          />
-
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="password"
-            value={password}
-            name="password"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            color="secondary"
-            onChange={onChange}
-          />
-
-          <Link to="/projects" style={{ textDecoration: "none" }}>
-            <Button
-              type="submit"
+        <Grid item>
+          <form onSubmit={onSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
               fullWidth
-              variant="contained"
+              id="email"
+              value={email}
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
               color="secondary"
-              className={classes.submit}
-            >
-              Log in
-            </Button>
+              onChange={onChange}
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="password"
+              value={password}
+              name="password"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+              color="secondary"
+              onChange={onChange}
+            />
+
+            <Link to="/projects" style={{ textDecoration: "none" }}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
+                Log in
+              </Button>
+            </Link>
+          </form>
+        </Grid>
+        <Grid item>
+          <Link to="/register" className={classes.textField}>
+            {" "}
+            Don't have an account? Sign Up
           </Link>
-        </form>
+        </Grid>
       </Grid>
-      <Grid item>
-        <Link to="/register" className={classes.textField}>
-          {" "}
-          Don't have an account? Sign Up
-        </Link>
-      </Grid>
-    </Grid>
+    </Container>
   );
 };
 
