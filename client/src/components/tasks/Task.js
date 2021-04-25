@@ -122,12 +122,17 @@ const Task = ({ task }) => {
               className={classes.complete}
               type="submit"
               onClick={() => changeStatus(task)}
+              aria-label="complete"
             >
               <CheckCircleRoundedIcon fontSize="large" />
             </IconButton>
           ) : (
-            //Uncomplete
-            <IconButton type="submit" onClick={() => changeStatus(task)}>
+            //Incomplete
+            <IconButton
+              type="submit"
+              onClick={() => changeStatus(task)}
+              aria-label="incomplete"
+            >
               <RadioButtonUncheckedRoundedIcon fontSize="large" />
             </IconButton>
           )}{" "}
@@ -159,7 +164,7 @@ const Task = ({ task }) => {
                 >
                   <Grid item>
                     <IconButton
-                      aria-label="delete"
+                      aria-label="edit"
                       type="submit"
                       className={classes.edit}
                       onClick={() => selectTask(task)}

@@ -84,6 +84,7 @@ const NewProject = () => {
             className={classes.complete}
             type="button"
             onClick={onClickForm}
+            aria-label="add"
           >
             <AddRoundedIcon fontSize="large" />
           </IconButton>
