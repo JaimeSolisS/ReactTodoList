@@ -1,6 +1,10 @@
 module.exports = {
     ci: {
         collect: {
+            settings: {
+                emulatedFormFactor: 'desktop',
+                throttling: { rttMs: 40, throughputKbps: 10 * 1024, cpuSlowdownMultiplier: 1 },
+            },
             startServerCommand: 'npm start',
             numberOfRuns: 3,
             url: [
