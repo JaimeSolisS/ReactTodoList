@@ -34,3 +34,76 @@ exports.getProjects = async (req, res) => {
     res.status(500).send("Some error");
   }
 };
+
+//Update project
+exports.updateProject = async (req, res) => {
+  //Check for errors
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  //get project info
+  const { name } = req.body;
+  const newProject = {};
+
+  //field to update
+  if (name) {
+    newProject.name = name;
+  }
+
+  try {
+    //Check ID
+    //console.log(req.params.id)
+    let project = await Project.findById(req.params.id);
+
+    //Check if project exists
+    if (!project) {
+      return res.status(404).json({ msg: "Project not found" });
+    }
+
+    //Check project owner
+    if (project.owner.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "Unauthorized" });
+    }
+    //update
+    project = await Project.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: newProject },
+      { new: true }
+    );
+
+    res.json({ project });
+  } catch (error) {
+    console.log(500);
+    res.status(500).send("Server error");
+  }
+};
+
+//Update project
+exports.deleteProject = async (req, res) => {
+  try {
+    //Check ID
+    //console.log(req.params.id)
+    let project = await Project.findById(req.params.id);
+
+    //Check if project exists
+    if (!project) {
+      return res.status(404).json({ msg: "Project not found" });
+    }
+
+    //Check project owner
+    if (project.owner.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "Unauthorized" });
+    }
+    //delete
+    await Project.findOneAndRemove({ _id: req.params.id });
+    res.json({ msg: "Project removed" });
+
+    res.json({ project });
+  } catch (error) {
+    console.log(500);
+    res.status(500).send("Server error");
+  }
+};
