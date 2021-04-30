@@ -14,4 +14,13 @@ router.post(
   taskController.createTask
 );
 
+//get tasks
+router.get("/", auth, taskController.getTasks);
+
+//update task
+router.put("/:id", auth, taskController.updateTask);
+
+//delete task
+router.delete("/:id", auth, taskController.deleteTask);
+
 module.exports = router;
