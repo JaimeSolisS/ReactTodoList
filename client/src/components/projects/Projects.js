@@ -125,7 +125,7 @@ function Projects(props) {
 
   //get auth info
   const authContext = useContext(AuthContext);
-  const { user, userAuthenticated } = authContext;
+  const { user, userAuthenticated, logOut } = authContext;
 
   useEffect(() => {
     userAuthenticated();
@@ -174,6 +174,7 @@ function Projects(props) {
                 className={classes.button}
                 startIcon={<MeetingRoomRoundedIcon />}
                 disableElevation
+                onClick={() => logOut()}
               >
                 Log out
               </Button>

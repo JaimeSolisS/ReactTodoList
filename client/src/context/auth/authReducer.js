@@ -44,7 +44,18 @@ const authReducer = (state, action) => {
     case GET_USER:
       return {
         ...state,
+        auth: true,
         user: action.payload,
+      };
+
+    case SIGN_OUT:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        user: null,
+        auth: null,
+        msg: action.payload,
       };
 
     default:
