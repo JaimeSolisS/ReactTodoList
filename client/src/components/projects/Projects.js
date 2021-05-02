@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,6 +17,7 @@ import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import MeetingRoomRoundedIcon from "@material-ui/icons/MeetingRoomRounded";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
 
 import TaskList from "../tasks/TaskList";
 
@@ -121,6 +122,14 @@ function Projects(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
+  //get auth info
+  const authContext = useContext(AuthContext);
+  const { user, userAuthenticated } = authContext;
+
+  useEffect(() => {
+    userAuthenticated();
+  }, []);
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -137,9 +146,10 @@ function Projects(props) {
             <MenuIcon />
           </IconButton>
           <Grid container justify="space-between">
-            <Typography variant="h6" noWrap>
-              Hey User
-            </Typography>
+            {user ? (
+              <Typography variant="h6">Welcome, {user.name}</Typography>
+            ) : null}
+
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
               <Grid container justify="space-between">
                 <MeetingRoomRoundedIcon />

@@ -110,6 +110,7 @@ const AuthState = (props) => {
         //func
         registerUser,
         logIn,
+        userAuthenticated,
       }}
     >
       {props.children}
