@@ -64,7 +64,7 @@ const AuthState = (props) => {
       // console.log(res);
       dispatch({
         type: GET_USER,
-        payload: res.data,
+        payload: res.data.user,
       });
     } catch (error) {
       dispatch({
