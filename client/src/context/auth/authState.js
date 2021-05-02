@@ -14,7 +14,7 @@ import axiosClient from "../../config/axios";
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
-    auht: null,
+    auth: null,
     user: null,
     msg: null,
   };
@@ -25,18 +25,22 @@ const AuthState = (props) => {
 
   const registerUser = async (data) => {
     try {
-      console.log(data);
       const res = await axiosClient.post("/api/users", data);
       console.log(res);
 
       dispatch({
         type: REGISTER_SUCCESS,
+        payload: res.data,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.msg);
+      const alert = {
+        msg: error.response.data.msg,
+      };
 
       dispatch({
         type: REGISTER_ERROR,
+        payload: alert,
       });
     }
   };
