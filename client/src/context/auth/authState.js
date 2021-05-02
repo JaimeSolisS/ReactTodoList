@@ -10,6 +10,7 @@ import {
   SIGN_OUT,
 } from "../../types";
 import axiosClient from "../../config/axios";
+import authToken from "../../config/authToken";
 
 const AuthState = (props) => {
   const initialState = {
@@ -32,6 +33,10 @@ const AuthState = (props) => {
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+
+      //get user
+
+      userAuthenticated();
     } catch (error) {
       console.log(error.response.data.msg);
       const alert = {
@@ -41,6 +46,29 @@ const AuthState = (props) => {
       dispatch({
         type: REGISTER_ERROR,
         payload: alert,
+      });
+    }
+  };
+
+  // return auth user
+  const userAuthenticated = async () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      //send token in header
+      authToken(token);
+    }
+
+    try {
+      const res = await axiosClient.get("/api/auth");
+      // console.log(res);
+      dispatch({
+        type: GET_USER,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: LOGIN_ERROR,
       });
     }
   };
