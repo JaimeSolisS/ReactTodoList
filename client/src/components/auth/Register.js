@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Container, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = (props) => {
   //get context
   const alertContext = useContext(AlertContext);
   const {
@@ -61,7 +61,18 @@ const Register = () => {
   } = alertContext;
 
   const authContext = useContext(AuthContext);
-  const { registerUser } = authContext;
+  const { msg, auth, registerUser } = authContext;
+
+  //user register or duplicate user
+  useEffect(() => {
+    if (auth) {
+      props.history.push("/projects");
+    }
+
+    if (msg) {
+      showAlertEmail(msg.msg);
+    }
+  }, [msg, auth, props.history]);
 
   const classes = useStyles();
 
