@@ -10,6 +10,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import ProjectState from "./context/projects/projectState";
 import TaskState from "./context/tasks/taskState";
+import AlertState from "./context/alerts/alertState";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -53,13 +54,15 @@ function App() {
       <CssBaseline />
       <ProjectState>
         <TaskState>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/projects" component={Projects} />
-            </Switch>
-          </BrowserRouter>
+          <AlertState>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/projects" component={Projects} />
+              </Switch>
+            </BrowserRouter>
+          </AlertState>
         </TaskState>
       </ProjectState>
     </ThemeProvider>
