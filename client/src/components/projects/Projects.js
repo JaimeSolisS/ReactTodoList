@@ -18,6 +18,7 @@ import ProjectList from "./ProjectList";
 import MeetingRoomRoundedIcon from "@material-ui/icons/MeetingRoomRounded";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import Button from "@material-ui/core/Button";
 
 import TaskList from "../tasks/TaskList";
 
@@ -165,13 +166,18 @@ function Projects(props) {
                 </Grid>
               ) : null}
             </Grid>
-
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              <Grid container justify="space-between">
-                <MeetingRoomRoundedIcon />
-                <Typography variant="h6">Sign out</Typography>
-              </Grid>
-            </Link>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                className={classes.button}
+                startIcon={<MeetingRoomRoundedIcon />}
+                disableElevation
+              >
+                Log out
+              </Button>
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
