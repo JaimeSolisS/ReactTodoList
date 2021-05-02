@@ -66,12 +66,12 @@ const Register = () => {
   const classes = useStyles();
 
   const [user, setUser] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
 
-  const { username, email, password } = user;
+  const { name, email, password } = user;
 
   const onChange = (e) => {
     setUser({
@@ -88,7 +88,7 @@ const Register = () => {
     e.preventDefault();
 
     //empty field validation
-    if (username === "") {
+    if (name === "") {
       showAlertUser("Username is required!");
       return;
     }
@@ -122,7 +122,7 @@ const Register = () => {
 
     //PASS
     registerUser({
-      username,
+      name,
       email,
       password,
     });
@@ -155,11 +155,11 @@ const Register = () => {
               variant="outlined"
               margin="normal"
               fullWidth
-              id="username"
-              value={username}
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="name"
+              value={name}
+              label="Name"
+              name="name"
+              autoComplete="name"
               autoFocus
               color="secondary"
               onChange={onChange}

@@ -25,6 +25,7 @@ const AuthState = (props) => {
 
   const registerUser = async (data) => {
     try {
+      console.log(data);
       const res = await axiosClient.post("/api/users", data);
       console.log(res);
 
