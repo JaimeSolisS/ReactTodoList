@@ -146,9 +146,25 @@ function Projects(props) {
             <MenuIcon />
           </IconButton>
           <Grid container justify="space-between">
-            {user ? (
-              <Typography variant="h6">Welcome, {user.name}</Typography>
-            ) : null}
+            <Grid item>
+              {user ? (
+                <Grid
+                  container
+                  direction="row"
+                  justify="flex-start"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <Typography variant="h6">Welcome, &nbsp; </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="h6" style={{ fontWeight: 600 }}>
+                      {user.name}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              ) : null}
+            </Grid>
 
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
               <Grid container justify="space-between">
