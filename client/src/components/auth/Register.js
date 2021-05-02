@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Container, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import AlertContext from "../../context/alerts/alertContext";
+import AuthContext from "../../context/auth/authContext";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = (props) => {
   //get context
   const alertContext = useContext(AlertContext);
   const {
@@ -59,15 +60,29 @@ const Register = () => {
     hideAlertPassword,
   } = alertContext;
 
+  const authContext = useContext(AuthContext);
+  const { msg, auth, registerUser } = authContext;
+
+  //user register or duplicate user
+  useEffect(() => {
+    if (auth) {
+      props.history.push("/projects");
+    }
+
+    if (msg) {
+      showAlertEmail(msg.msg);
+    }
+  }, [msg, auth, props.history]);
+
   const classes = useStyles();
 
   const [user, setUser] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
 
-  const { username, email, password } = user;
+  const { name, email, password } = user;
 
   const onChange = (e) => {
     setUser({
@@ -76,13 +91,15 @@ const Register = () => {
     });
 
     hideAlertUser();
+    hideAlertEmail();
+    hideAlertPassword();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     //empty field validation
-    if (username === "") {
+    if (name === "") {
       showAlertUser("Username is required!");
       return;
     }
@@ -106,13 +123,20 @@ const Register = () => {
     }
 
     //8 characters, at least 1 uppercase, 1 lowercase and 1 special character
-    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$.!%*#?&]{8,}/;
+    regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$.!%*#?&]{8,}/;
     if (!regex.test(password)) {
       showAlertPassword(
         "Please enter a password with at least 8 characters including at least one uppercase letter, one lower case letter and one number"
       );
       return;
     }
+
+    //PASS
+    registerUser({
+      name,
+      email,
+      password,
+    });
   };
 
   return (
@@ -142,11 +166,11 @@ const Register = () => {
               variant="outlined"
               margin="normal"
               fullWidth
-              id="username"
-              value={username}
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="name"
+              value={name}
+              label="Name"
+              name="name"
+              autoComplete="name"
               autoFocus
               color="secondary"
               onChange={onChange}

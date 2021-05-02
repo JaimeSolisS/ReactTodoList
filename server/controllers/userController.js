@@ -12,7 +12,7 @@ exports.createUser = async (req, res) => {
     let user = await User.findOne({ email });
 
     if (user) {
-      return res.status(403).json({ msg: "User already exists" });
+      return res.status(403).json({ msg: "This email is already registered" });
     }
 
     //check errors: Missing parameters, weak password
