@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -7,6 +7,9 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+
+import AlertContext from "../../context/alerts/alertContext";
+import AuthContext from "../../context/auth/authContext";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -43,7 +46,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = (props) => {
+  //get context
+  const alertContext = useContext(AlertContext);
+  const {
+    alertEmailSt,
+    alertPasswordSt,
+    showAlertEmail,
+    hideAlertEmail,
+    showAlertPassword,
+    hideAlertPassword,
+  } = alertContext;
+
+  const authContext = useContext(AuthContext);
+  const { msg, auth, logIn } = authContext;
+
+  //user is not registered or password error
+  useEffect(() => {
+    if (auth) {
+      props.history.push("/projects");
+    }
+
+    if (msg) {
+      if (msg.msg === "Password is incorrect") {
+        showAlertPassword(msg.msg);
+      } else showAlertEmail(msg.msg);
+    }
+  }, [msg, auth, props.history]);
   const classes = useStyles();
 
   const [user, setUser] = useState({
@@ -58,10 +87,33 @@ const Login = () => {
       ...user,
       [e.target.name]: e.target.value,
     });
+    hideAlertEmail();
+    hideAlertPassword();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    //empty email vailidation
+    if (email === "") {
+      showAlertEmail("Email is required!");
+      return;
+    }
+
+    //simple valid email validation
+    var regex = /\S+@\S+\.\S+/;
+    if (!regex.test(email)) {
+      showAlertEmail("Please use a valid email address");
+      return;
+    }
+    //empty passowrd validation
+    if (password === "") {
+      showAlertPassword("Password is required!");
+      return;
+    }
+
+    //Pass
+    logIn({ email, password });
   };
 
   return (
@@ -90,7 +142,6 @@ const Login = () => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="email"
               value={email}
@@ -100,12 +151,13 @@ const Login = () => {
               autoFocus
               color="secondary"
               onChange={onChange}
+              helperText={alertEmailSt ? `${alertEmailSt}` : ""}
+              error={!!alertEmailSt}
             />
 
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="password"
               value={password}
@@ -115,19 +167,19 @@ const Login = () => {
               autoComplete="current-password"
               color="secondary"
               onChange={onChange}
+              helperText={alertPasswordSt ? `${alertPasswordSt}` : ""}
+              error={!!alertPasswordSt}
             />
 
-            <Link to="/projects" style={{ textDecoration: "none" }}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                className={classes.submit}
-              >
-                Log in
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+            >
+              Log in
+            </Button>
           </form>
         </Grid>
         <Grid item>
