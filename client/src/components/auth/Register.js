@@ -76,6 +76,8 @@ const Register = () => {
     });
 
     hideAlertUser();
+    hideAlertEmail();
+    hideAlertPassword();
   };
 
   const onSubmit = (e) => {
