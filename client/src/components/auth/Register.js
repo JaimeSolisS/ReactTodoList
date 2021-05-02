@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import AlertContext from "../../context/alerts/alertContext";
+import AuthContext from "../../context/auth/authContext";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -59,6 +60,9 @@ const Register = () => {
     hideAlertPassword,
   } = alertContext;
 
+  const authContext = useContext(AuthContext);
+  const { registerUser } = authContext;
+
   const classes = useStyles();
 
   const [user, setUser] = useState({
@@ -108,13 +112,20 @@ const Register = () => {
     }
 
     //8 characters, at least 1 uppercase, 1 lowercase and 1 special character
-    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$.!%*#?&]{8,}/;
+    regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$.!%*#?&]{8,}/;
     if (!regex.test(password)) {
       showAlertPassword(
         "Please enter a password with at least 8 characters including at least one uppercase letter, one lower case letter and one number"
       );
       return;
     }
+
+    //PASS
+    registerUser({
+      username,
+      email,
+      password,
+    });
   };
 
   return (
