@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import AlertContext from "../../context/alerts/alertContext";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -44,6 +45,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Register = () => {
+  //get context
+  const alertContext = useContext(AlertContext);
+  const {
+    alertUserSt,
+    alertEmailSt,
+    alertPasswordSt,
+    showAlertUser,
+    hideAlertUser,
+    showAlertEmail,
+    hideAlertEmail,
+    showAlertPassword,
+    hideAlertPassword,
+  } = alertContext;
+
   const classes = useStyles();
 
   const [user, setUser] = useState({
@@ -59,10 +74,45 @@ const Register = () => {
       ...user,
       [e.target.name]: e.target.value,
     });
+
+    hideAlertUser();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    //empty field validation
+    if (username === "") {
+      showAlertUser("Username is required!");
+      return;
+    }
+
+    //empty email vailidation
+    if (email === "") {
+      showAlertEmail("Email is required!");
+      return;
+    }
+
+    //simple valid email validation
+    var regex = /\S+@\S+\.\S+/;
+    if (!regex.test(email)) {
+      showAlertEmail("Please use a valid email address");
+      return;
+    }
+    //empty passowrd validation
+    if (password === "") {
+      showAlertPassword("Password is required!");
+      return;
+    }
+
+    //8 characters, at least 1 uppercase, 1 lowercase and 1 special character
+    var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$.!%*#?&]{8,}/;
+    if (!regex.test(password)) {
+      showAlertPassword(
+        "Please enter a password with at least 8 characters including at least one uppercase letter, one lower case letter and one number"
+      );
+      return;
+    }
   };
 
   return (
@@ -91,7 +141,6 @@ const Register = () => {
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="username"
               value={username}
@@ -101,12 +150,13 @@ const Register = () => {
               autoFocus
               color="secondary"
               onChange={onChange}
+              helperText={alertUserSt ? `${alertUserSt}` : ""}
+              error={!!alertUserSt}
             />
 
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="email"
               value={email}
@@ -116,12 +166,13 @@ const Register = () => {
               autoFocus
               color="secondary"
               onChange={onChange}
+              helperText={alertEmailSt ? `${alertEmailSt}` : ""}
+              error={!!alertEmailSt}
             />
 
             <TextField
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="password"
               value={password}
@@ -131,6 +182,8 @@ const Register = () => {
               autoComplete="current-password"
               color="secondary"
               onChange={onChange}
+              helperText={alertPasswordSt ? `${alertPasswordSt}` : ""}
+              error={!!alertPasswordSt}
             />
 
             <Button
