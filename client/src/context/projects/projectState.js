@@ -50,7 +50,7 @@ const ProjectState = (props) => {
     // project.id = uuid(); ->from back
     try {
       const res = await axiosClient.post("/api/projects", project);
-      console.log(res);
+      //console.log(res);
 
       //Insert project to state
       dispatch({

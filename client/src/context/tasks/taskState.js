@@ -77,10 +77,10 @@ const TaskState = (props) => {
   //FUNCTIONS
   //get tasks from a project
   const getTasks = async (project) => {
-    console.log(project);
+    //console.log(project);
     try {
       const res = await axiosClient.get("/api/tasks", { params: { project } });
-      console.log("----debug----", res);
+      //console.log(res);
       dispatch({
         type: TASKS_PROJECT,
         payload: res.data.tasks,
@@ -93,11 +93,11 @@ const TaskState = (props) => {
   //add task to project
   const addTask = async (task) => {
     //task.id = uuid(); ->id comes from back
-    console.log(task);
+    //console.log(task);
     try {
       const res = await axiosClient.post("/api/tasks", task);
-      console.log("debug", res.data.task);
-      console.log("task", task);
+      //console.log(res.data.task);
+      //console.log("task", task);
       dispatch({
         type: ADD_TASK,
         payload: res.data.task,
@@ -137,8 +137,7 @@ const TaskState = (props) => {
   const updateTask = async (task) => {
     try {
       const res = await axiosClient.put(`/api/tasks/${task._id}`, task);
-      //console.log("debug");
-      console.log("debug--->", res);
+      //console.log(res);
       dispatch({
         type: UPDATE_TASK,
         payload: res.data.task,
@@ -152,7 +151,7 @@ const TaskState = (props) => {
   const changeStatusTask = async (task) => {
     try {
       const res = await axiosClient.put(`/api/tasks/${task._id}`, task);
-      console.log(res);
+      //console.log(res);
       dispatch({
         type: STATUS_TASK,
         payload: res.data.task,
