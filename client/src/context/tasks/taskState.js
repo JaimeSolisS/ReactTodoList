@@ -80,7 +80,7 @@ const TaskState = (props) => {
     console.log(project);
     try {
       const res = await axiosClient.get("/api/tasks", { params: { project } });
-      console.log(res);
+      console.log("----debug----", res);
       dispatch({
         type: TASKS_PROJECT,
         payload: res.data.tasks,
@@ -96,10 +96,11 @@ const TaskState = (props) => {
     console.log(task);
     try {
       const res = await axiosClient.post("/api/tasks", task);
-      console.log(res);
+      console.log("debug", res.data.task);
+      console.log("task", task);
       dispatch({
         type: ADD_TASK,
-        payload: task,
+        payload: res.data.task,
       });
     } catch (error) {
       console.log(error);
@@ -137,11 +138,12 @@ const TaskState = (props) => {
     try {
       const res = await axiosClient.put(`/api/tasks/${task._id}`, task);
       //console.log("debug");
-      console.log("debug", res);
+      console.log("debug--->", res);
       dispatch({
         type: UPDATE_TASK,
         payload: res.data.task,
       });
+      getTasks(task.project);
     } catch (error) {
       console.log(error);
     }
