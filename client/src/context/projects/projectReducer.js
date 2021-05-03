@@ -35,14 +35,14 @@ const projecReducer = (state, action) => {
       return {
         ...state,
         project: state.projects.filter(
-          (project) => project.id === action.payload
+          (project) => project._id === action.payload
         ),
       };
     case DELETE_PROJECT:
       return {
         ...state,
         projects: state.projects.filter(
-          (project) => project.id !== action.payload
+          (project) => project._id !== action.payload
         ),
         project: null,
       };

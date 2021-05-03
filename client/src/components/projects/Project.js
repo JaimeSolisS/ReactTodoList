@@ -24,7 +24,7 @@ const Project = ({ project }) => {
     <Grid>
       <Button
         style={{ textTransform: "none" }}
-        onClick={() => selectProject(project.id)}
+        onClick={() => selectProject(project._id)}
       >
         <Typography variant="h6" gutterBottom>
           {project.name}
