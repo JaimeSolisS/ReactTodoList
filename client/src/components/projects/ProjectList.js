@@ -31,7 +31,7 @@ const ProjectList = () => {
   return (
     <Grid container direction="column" justify="flex-start" alignItems="center">
       {projects.map((project) => (
-        <Project key={project.id} project={project} />
+        <Project key={project._id} project={project} />
       ))}
     </Grid>
   );

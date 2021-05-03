@@ -15,6 +15,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import TaskForm from "../tasks/TaskForm";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -80,6 +81,7 @@ const Task = ({ task }) => {
 
   const handleCloseSave = () => {
     setOpen(false);
+    getTasks(actualProject._id);
   };
   //Extract if a project is selected
   const projectsContext = useContext(projectContext);
@@ -93,8 +95,8 @@ const Task = ({ task }) => {
 
   //Delete Button
   const deleteTaskFn = (id) => {
-    deleteTask(id);
-    getTasks(actualProject.id);
+    deleteTask(id, actualProject._id);
+    getTasks(actualProject._id);
   };
 
   //Edit Task
@@ -140,8 +142,7 @@ const Task = ({ task }) => {
         <Grid item xs>
           <Typography variant="subtitle1"> {task.name} </Typography>{" "}
           <Typography variant="body2" color="textSecondary">
-            {" "}
-            {task.date}{" "}
+            {task.dueDate ? moment(task.dueDate).format("ddd D MMM ") : ""}
           </Typography>{" "}
         </Grid>{" "}
         <Grid item>
@@ -206,7 +207,7 @@ const Task = ({ task }) => {
                       aria-label="delete"
                       type="submit"
                       className={classes.delete}
-                      onClick={() => deleteTaskFn(task.id)}
+                      onClick={() => deleteTaskFn(task._id)}
                     >
                       <DeleteRoundedIcon fontSize="large" />
                     </IconButton>

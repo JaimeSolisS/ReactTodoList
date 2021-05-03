@@ -72,6 +72,7 @@ const Login = (props) => {
         showAlertPassword(msg.msg);
       } else showAlertEmail(msg.msg);
     }
+    // eslint-disable-next-line
   }, [msg, auth, props.history]);
   const classes = useStyles();
 

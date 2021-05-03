@@ -88,7 +88,7 @@ const TaskList = () => {
   const [actualProject] = project;
 
   const onClickDelete = () => {
-    deleteProject(actualProject.id);
+    deleteProject(actualProject._id);
   };
 
   return (
@@ -149,7 +149,7 @@ const TaskList = () => {
         </Grid>
         <Grid item>
           <IconButton
-            aria-label="delete"
+            aria-label="delete project"
             type="submit"
             className={classes.delete}
             onClick={onClickDelete}
