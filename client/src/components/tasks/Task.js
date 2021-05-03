@@ -80,6 +80,7 @@ const Task = ({ task }) => {
 
   const handleCloseSave = () => {
     setOpen(false);
+    getTasks(actualProject._id);
   };
   //Extract if a project is selected
   const projectsContext = useContext(projectContext);
