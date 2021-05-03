@@ -114,7 +114,7 @@ const TaskForm = (props) => {
       handleDateChange(null); //clear datepicker
     }
 
-    getTasks(actualProject.id);
+    getTasks(actualProject._id);
 
     //clear form
     setTask({
