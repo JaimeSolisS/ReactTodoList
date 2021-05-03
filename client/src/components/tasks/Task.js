@@ -15,6 +15,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import TaskForm from "../tasks/TaskForm";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -136,8 +137,7 @@ const Task = ({ task }) => {
         <Grid item xs>
           <Typography variant="subtitle1"> {task.name} </Typography>{" "}
           <Typography variant="body2" color="textSecondary">
-            {" "}
-            {task.date}{" "}
+            {task.dueDate ? moment(task.dueDate).format("ddd D MMM ") : ""}
           </Typography>{" "}
         </Grid>{" "}
         <Grid item>

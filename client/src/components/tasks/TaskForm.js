@@ -47,7 +47,7 @@ const TaskForm = (props) => {
   useEffect(() => {
     if (selectedTaskSt !== null) {
       setTask(selectedTaskSt);
-      setSelectedDate(selectedTaskSt.dateObj);
+      setSelectedDate(selectedTaskSt.dueDate);
     } else
       setTask({
         name: "",
@@ -59,7 +59,7 @@ const TaskForm = (props) => {
   const [task, setTask] = useState({
     name: "",
     date: "",
-    dateObj: "",
+    dueDate: "",
   });
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -97,9 +97,10 @@ const TaskForm = (props) => {
       task.project = actualProject._id;
       // task.state = false;
 
+      //Save date
       if (selectedDate == null) task.date = selectedDate;
       else task.date = moment(selectedDate).format("ddd D MMM ");
-      task.dateObj = selectedDate; //for edition
+      task.dueDate = selectedDate; //for edition
 
       addTask(task);
       handleDateChange(null); //clear datepicker
@@ -108,8 +109,9 @@ const TaskForm = (props) => {
       //else task.date = moment(selectedDate).format("ddd D MMM ");
       //task.dateObj = selectedDate; //for edition
       if (selectedDate != null)
-        task.date = moment(selectedDate).format("ddd D MMM ");
-      task.dateObj = selectedDate; //for edition
+        task.date = moment(task.dueDate).format("ddd D MMM ");
+      setSelectedDate(task.dueDate);
+      task.dueDate = selectedDate; //for edition
       updateTask(task);
       handleDateChange(null); //clear datepicker
     }
