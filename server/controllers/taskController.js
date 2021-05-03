@@ -38,7 +38,7 @@ exports.createTask = async (req, res) => {
 exports.getTasks = async (req, res) => {
   try {
     //Get project and check if exists
-    const { project } = req.body;
+    const { project } = req.query;
     const projectExists = await Project.findById(project);
     if (!projectExists) {
       return res.status(404).json({ msg: "Project not found" });
@@ -85,9 +85,9 @@ exports.updateTask = async (req, res) => {
     const newTask = {};
 
     //User may change or not these fields
-    if (name) newTask.name = name;
-    if (status) newTask.status = status;
-    if (dueDate) newTask.dueDate = dueDate;
+    newTask.name = name;
+    newTask.status = status;
+    newTask.dueDate = dueDate;
 
     //Save task
     task = await Task.findByIdAndUpdate({ _id: req.params.id }, newTask, {
@@ -105,7 +105,7 @@ exports.updateTask = async (req, res) => {
 exports.deleteTask = async (req, res) => {
   try {
     //Get project and check if exists
-    const { project } = req.body;
+    const { project } = req.query;
 
     const projectExists = await Project.findById(project);
 

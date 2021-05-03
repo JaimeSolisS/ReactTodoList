@@ -13,15 +13,12 @@ const taskReducer = (state, action) => {
     case TASKS_PROJECT:
       return {
         ...state,
-        tasksProjectSt: state.tasks.filter(
-          (task) => task.projectId === action.payload
-        ),
-        selectedTaskSt: null,
+        tasksProjectSt: action.payload,
       };
     case ADD_TASK:
       return {
         ...state,
-        tasks: [...state.tasks, action.payload],
+        tasksProjectSt: [...state.tasksProjectSt, action.payload],
         error: false,
       };
     case VALIDATE_TASK:
@@ -33,7 +30,9 @@ const taskReducer = (state, action) => {
     case DELETE_TASK:
       return {
         ...state,
-        tasks: state.tasks.filter((task) => task.id !== action.payload),
+        tasksProjectSt: state.tasksProjectSt.filter(
+          (task) => task._id !== action.payload
+        ),
       };
     case ACTUAL_TASK:
       return {
@@ -44,16 +43,16 @@ const taskReducer = (state, action) => {
     case UPDATE_TASK:
       return {
         ...state,
-        tasks: state.tasks.map((task) =>
-          task.id === action.payload.id ? action.payload : task
+        tasksProjectSt: state.tasksProjectSt.map((task) =>
+          task._id === action.payload ? action.payload : task
         ),
         selectedTaskSt: null,
       };
     case STATUS_TASK:
       return {
         ...state,
-        tasks: state.tasks.map((task) =>
-          task.id === action.payload.id ? action.payload : task
+        tasksProjectSt: state.tasksProjectSt.map((task) =>
+          task._id === action.payload ? action.payload : task
         ),
       };
     default:

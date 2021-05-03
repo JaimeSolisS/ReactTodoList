@@ -94,8 +94,8 @@ const TaskForm = (props) => {
     //Check if it's a new task or an edit because it adds a new task when edit
     if (selectedTaskSt === null) {
       //add new task to state
-      task.projectId = actualProject.id;
-      task.state = false;
+      task.project = actualProject._id;
+      // task.state = false;
 
       if (selectedDate == null) task.date = selectedDate;
       else task.date = moment(selectedDate).format("ddd D MMM ");

@@ -93,8 +93,8 @@ const Task = ({ task }) => {
 
   //Delete Button
   const deleteTaskFn = (id) => {
-    deleteTask(id);
-    getTasks(actualProject.id);
+    deleteTask(id, actualProject._id);
+    getTasks(actualProject._id);
   };
 
   //Edit Task
@@ -201,7 +201,7 @@ const Task = ({ task }) => {
                       aria-label="delete"
                       type="submit"
                       className={classes.delete}
-                      onClick={() => deleteTaskFn(task.id)}
+                      onClick={() => deleteTaskFn(task._id)}
                     >
                       <DeleteRoundedIcon fontSize="large" />
                     </IconButton>
