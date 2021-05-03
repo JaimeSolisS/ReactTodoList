@@ -71,7 +71,7 @@ const Register = (props) => {
 
     if (msg) {
       showAlertEmail(msg.msg);
-    }
+    } // eslint-disable-next-line
   }, [msg, auth, props.history]);
 
   const classes = useStyles();

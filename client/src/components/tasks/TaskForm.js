@@ -40,7 +40,7 @@ const TaskForm = (props) => {
     selectedTaskSt,
     addTask,
     validateTask,
-    getTasks,
+    //getTasks,
     updateTask,
   } = tasksContext;
 

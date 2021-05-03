@@ -16,7 +16,6 @@ import CheckRoundedIcon from "@material-ui/icons/CheckRounded";
 import NewProject from "./NewProject";
 import ProjectList from "./ProjectList";
 import MeetingRoomRoundedIcon from "@material-ui/icons/MeetingRoomRounded";
-import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import Button from "@material-ui/core/Button";
 
@@ -129,6 +128,7 @@ function Projects(props) {
 
   useEffect(() => {
     userAuthenticated();
+    // eslint-disable-next-line
   }, []);
 
   return (
