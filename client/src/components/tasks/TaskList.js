@@ -91,6 +91,10 @@ const TaskList = () => {
     deleteProject(actualProject._id);
   };
 
+  const handleCloseSave = () => {
+    setOpen(false);
+  };
+
   return (
     <Fragment>
       <Grid
@@ -142,7 +146,7 @@ const TaskList = () => {
             <Fade in={open}>
               <div className={classes.paper}>
                 <h2 id="transition-modal-title">New Task</h2>
-                <TaskForm />
+                <TaskForm onCloseModal={handleCloseSave} />
               </div>
             </Fade>
           </Modal>
