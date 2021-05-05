@@ -15,6 +15,7 @@ const authReducer = (state, action) => {
         ...state,
         auth: true,
         msg: null,
+        load: false,
       };
 
     case LOGIN_SUCCESS:
@@ -23,6 +24,7 @@ const authReducer = (state, action) => {
         ...state,
         auth: true,
         msg: null,
+        load: false,
       };
 
     case REGISTER_ERROR:
@@ -31,6 +33,7 @@ const authReducer = (state, action) => {
         ...state,
         token: null,
         msg: action.payload,
+        load: false,
       };
 
     case LOGIN_ERROR:
@@ -39,6 +42,7 @@ const authReducer = (state, action) => {
         ...state,
         token: null,
         msg: action.payload,
+        load: false,
       };
 
     case GET_USER:
@@ -46,6 +50,7 @@ const authReducer = (state, action) => {
         ...state,
         auth: true,
         user: action.payload,
+        load: false,
       };
 
     case SIGN_OUT:
@@ -56,6 +61,7 @@ const authReducer = (state, action) => {
         user: null,
         auth: null,
         msg: action.payload,
+        load: false,
       };
 
     default:
