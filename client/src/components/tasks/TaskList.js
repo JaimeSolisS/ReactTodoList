@@ -117,7 +117,7 @@ const TaskList = () => {
               There are no tasks to do
             </Typography>
           ) : (
-            tasksProjectSt.map((task) => <Task key={task.id} task={task} />)
+            tasksProjectSt.map((task) => <Task key={task._id} task={task} />)
           )}
         </Grid>
         <Grid item>
