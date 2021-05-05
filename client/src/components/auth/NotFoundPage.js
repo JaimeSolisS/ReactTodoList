@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { useHistory } from "react-router-dom";
-import notReal from "../../assets/images/notReal.png";
+import notReal from "../../assets/images/notReal.webp";
 
 const useStyles = makeStyles(() => ({
   grid: {
@@ -27,7 +27,13 @@ const NotFoundPage = () => {
         className={classes.grid}
       >
         <Grid container direction="column" justify="center" alignItems="center">
-          <img src={notReal} style={{ width: "45%" }} />
+          <img
+            src={notReal}
+            style={{ width: "45%", height: "auto" }}
+            width="100"
+            height="100"
+            alt="big foot and nessie"
+          />
         </Grid>
         <Grid item>
           <Typography variant="h2" style={{ fontWeight: 600 }}>
