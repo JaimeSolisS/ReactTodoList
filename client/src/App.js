@@ -15,6 +15,7 @@ import AuthState from "./context/auth/authState";
 import authToken from "./config/authToken";
 
 import PrivateRoute from "./components/routes/PrivateRoute";
+import NotFoundPage from "./components/auth/NotFoundPage";
 //check if token
 const token = localStorage.getItem("token");
 if (token) {
@@ -70,7 +71,7 @@ function App() {
                   <Route exact path="/" component={Login} />
                   <Route exact path="/register" component={Register} />
                   <PrivateRoute exact path="/projects" component={Projects} />
-                  <Route component={Login} />
+                  <Route component={NotFoundPage} />
                 </Switch>
               </BrowserRouter>
             </AuthState>
