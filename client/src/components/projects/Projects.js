@@ -131,6 +131,8 @@ function Projects(props) {
     // eslint-disable-next-line
   }, []);
 
+  if (!user) return null;
+
   return (
     <div className={classes.root}>
       <CssBaseline />
