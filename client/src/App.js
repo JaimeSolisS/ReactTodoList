@@ -14,6 +14,8 @@ import AlertState from "./context/alerts/alertState";
 import AuthState from "./context/auth/authState";
 import authToken from "./config/authToken";
 
+import PrivateRoute from "./components/routes/PrivateRoute";
+
 //check if token
 const token = localStorage.getItem("token");
 if (token) {
@@ -68,7 +70,7 @@ function App() {
                 <Switch>
                   <Route exact path="/" component={Login} />
                   <Route exact path="/register" component={Register} />
-                  <Route exact path="/projects" component={Projects} />
+                  <PrivateRoute exact path="/projects" component={Projects} />
                 </Switch>
               </BrowserRouter>
             </AuthState>
