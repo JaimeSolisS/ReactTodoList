@@ -15,7 +15,7 @@ import AuthState from "./context/auth/authState";
 import authToken from "./config/authToken";
 
 import PrivateRoute from "./components/routes/PrivateRoute";
-
+import PublicRoute from "./components/routes/PublicRoute";
 //check if token
 const token = localStorage.getItem("token");
 if (token) {
@@ -68,9 +68,10 @@ function App() {
             <AuthState>
               <BrowserRouter>
                 <Switch>
-                  <Route exact path="/" component={Login} />
-                  <Route exact path="/register" component={Register} />
+                  <PublicRoute exact path="/" component={Login} />
+                  <PublicRoute exact path="/register" component={Register} />
                   <PrivateRoute exact path="/projects" component={Projects} />
+                  <Route component={Login} />
                 </Switch>
               </BrowserRouter>
             </AuthState>
