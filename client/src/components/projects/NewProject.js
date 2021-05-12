@@ -81,6 +81,7 @@ const NewProject = () => {
       <Grid container direction="column" justify="center" alignItems="center">
         <Grid item>
           <IconButton
+            aria-label="Add new project"
             className={classes.complete}
             type="button"
             onClick={onClickForm}
