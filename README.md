@@ -1,7 +1,7 @@
 
 # React Todo list
 
-![mongoDB](https://img.shields.io/badge/-mongoDB-success) ![express](https://img.shields.io/badge/-express-red) ![react](https://img.shields.io/badge/-React-blue) ![Node](https://img.shields.io/badge/-nodejs-green) ![materialui](https://img.shields.io/badge/framework-Material--UI-blue)
+![mongoDB](https://img.shields.io/badge/-mongoDB-success) ![express](https://img.shields.io/badge/-express-red) ![react](https://img.shields.io/badge/-React-blue) ![Node](https://img.shields.io/badge/-nodejs-green) 
 
 ## Description. 
 
@@ -12,6 +12,12 @@ A simple todo list app built in React with MERN stack and Material-UI with this 
 * For each task there is the option of setting a deadline for completion in a user-friendly way.
 * Log out 
 * Light/dark mode (based on device settings)
+
+## Tech Stack
+
+- [React](https://reactjs.org/), [Material-UI](https://material-ui.com/), [Moment](https://momentjs.com/)
+
+- [Node](https://nodejs.org/en/), [Express](https://expressjs.com/), [MongoDB](https://www.mongodb.com/cloud/atlas)
 
 ## [Live Demo](https://labwebtodo.netlify.app/) 
 
